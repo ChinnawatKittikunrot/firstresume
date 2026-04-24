@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
 <title>Resume Builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; color-scheme: light; }
 
 body {
   font-family: 'DM Sans', 'Sarabun', sans-serif;
-  background: #F0EDE8;
-  color: #1A1A2E;
+  background: #F0EDE8 !important;
+  color: #1A1A2E !important;
   min-height: 100vh;
 }
 
@@ -191,7 +192,7 @@ input::placeholder, textarea::placeholder { color: #4A4440; }
 #resume-card {
   width: 794px;
   min-height: 1123px;
-  background: #FFFFFF;
+  background: #FFFFFF !important;
   box-shadow: 0 16px 48px rgba(0,0,0,0.15);
   display: grid;
   grid-template-columns: 255px 1fr;
@@ -211,7 +212,7 @@ input::placeholder, textarea::placeholder { color: #4A4440; }
 
 /* LEFT COLUMN - light background */
 .rc-left {
-  background: #F7F4F0;
+  background: #F7F4F0 !important;
   padding: 52px 22px 40px;
   display: flex;
   flex-direction: column;
