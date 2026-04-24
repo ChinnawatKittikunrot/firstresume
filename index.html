@@ -6,6 +6,7 @@
 <meta name="color-scheme" content="light">
 <title>Resume Builder</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -104,7 +105,7 @@ input::placeholder, textarea::placeholder { color: #3A3430; }
 .rc-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--left-text); text-align: center; line-height: 1.35; margin-bottom: 4px; }
 .rc-role-badge { font-size: 9px; color: var(--left-accent); text-align: center; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 20px; transition: color 0.4s; }
 .rc-sec-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--left-accent2); font-weight: 800; margin: 18px 0 9px; padding-bottom: 5px; border-bottom: 2px solid var(--left-accent); transition: color 0.4s, border-color 0.4s; }
-.rc-contact-item { display: flex; align-items: flex-start; gap: 7px; font-family: 'Sarabun', sans-serif; font-size: 11px; color: var(--left-text); margin-bottom: 7px; line-height: 1.5; font-weight: 400; opacity: 0.85; }
+.rc-contact-item { display: flex; align-items: center; gap: 8px; font-family: 'Sarabun', sans-serif; font-size: 11px; color: var(--left-text); margin-bottom: 7px; line-height: 1.5; font-weight: 400; opacity: 0.85; }
 .rc-edu-item { margin-bottom: 13px; }
 .rc-edu-degree { font-size: 12px; font-weight: 700; color: var(--left-text); line-height: 1.4; }
 .rc-edu-school { font-family: 'Sarabun', sans-serif; font-size: 10.5px; color: var(--left-text); margin-top: 2px; font-weight: 400; opacity: 0.6; }
@@ -492,12 +493,26 @@ function renderResume(){
   document.getElementById('rc-role-right').textContent=role;
   const ph=document.getElementById('rc-photo-el');
   ph.innerHTML=photoDataURL?`<img src="${photoDataURL}" style="width:100%;height:100%;object-fit:cover">`:'👤';
+  
+  // --- แก้ไขเป็น Lucide Icon Framework ---
   const contacts=[];
-  if(phone) contacts.push({icon:'📞',text:phone});
-  if(email) contacts.push({icon:'✉️',text:email});
-  if(address) contacts.push({icon:'📍',text:address});
-  if(dob) contacts.push({icon:'🎂',text:'เกิด: '+dob});
-  document.getElementById('rc-contacts').innerHTML=contacts.map(c=>`<div class="rc-contact-item"><span style="flex-shrink:0">${c.icon}</span><span>${c.text}</span></div>`).join('');
+  if(phone) contacts.push({icon:'<i data-lucide="smartphone" style="width:14px;height:14px"></i>',text:phone});
+  if(email) contacts.push({icon:'<i data-lucide="mail" style="width:14px;height:14px"></i>',text:email});
+  if(address) contacts.push({icon:'<i data-lucide="map-pin" style="width:14px;height:14px"></i>',text:address});
+  if(dob) contacts.push({icon:'<i data-lucide="cake" style="width:14px;height:14px"></i>',text:dob});
+  
+  document.getElementById('rc-contacts').innerHTML=contacts.map(c=>`
+    <div class="rc-contact-item" style="display:flex; align-items:center; gap:8px; margin-bottom:7px;">
+      <span style="flex-shrink:0; color:var(--left-accent2); display:flex; align-items:center;">${c.icon}</span>
+      <span style="font-size:11px;">${c.text}</span>
+    </div>`).join('');
+
+  // สั่งให้ Lucide ทำการสร้างไอคอนจาก Tag <i>
+  if(window.lucide) {
+    lucide.createIcons();
+  }
+  // ------------------------------------
+
   const eduTitle=document.getElementById('rc-edu-title');
   const eduList=document.getElementById('rc-edu-list');
   if(eduItems.length>0){
